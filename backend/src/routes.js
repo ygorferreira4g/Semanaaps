@@ -6,10 +6,11 @@
 //body: request.body (dados para criaçao ou alterçao dos registros)
 
 // MongoDB (Não-relacional)
-const {Router} = require('express');
+const { Router } = require('express');
 const axios = require('axios'); 
-const routes = Router();
 const Dev = require('./models/Dev');
+
+const routes = Router();
 
 routes.post('/devs', async (request,response) => {
     const { github_username, techs } = request.body;
@@ -18,13 +19,13 @@ routes.post('/devs', async (request,response) => {
 
     const { name = login, avatar_url, bio } = apiResponse.data;
 
-   const techsArray = techs.split(','.localeCompare(tech => tech.trim()));
+  const techsArray = techs.split(',').map(tech => tech.trim());
 
    const dev = await Dev.create({
-        github_username: github_username,
-        name: name,
-        avatar_url: avatar_url,
-        bio: bio,
+        github_username,
+        name,
+        avatar_url,
+        bio,
         techs: techsArray,
    })
     return response.json(dev); 
