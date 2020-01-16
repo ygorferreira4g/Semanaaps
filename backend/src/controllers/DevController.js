@@ -40,5 +40,11 @@ module.exports = {
         }
             
         return response.json(dev); 
-    }
+    },
+    async update(){
+
+    },
+    async destroy(){
+
+    },
 };
