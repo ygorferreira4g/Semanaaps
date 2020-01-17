@@ -1,21 +1,20 @@
 import React, {useState} from 'react';
-
 // Componente: Bloco isolado de HTML, CSS e JS, o qual não interfere no restante da aplicação
 // Propiedade: Informaçoes que um componente PAI passa para o componeete FILHO
 // Estado: Informaçoes Mantidas pelo componente (Lembrar: imutabilidade)
+import './global.css';
+
+
 
 function App() {
-  const [counter, setCounter] = useState(0);
+  return(
+    <div id="app">
+      <aside></aside>
+      <main>
 
-  function incrementCounter(){
-    setCounter(counter + 1);
-  }
-
-  return (
-    <>
-    <h1>Contador: {counter}</h1>
-    <button onClick={incrementCounter}>Incrementar</button>
-    </>
+      </main>
+    </div>
+    
   );
 }
 
