@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 // Componente: Bloco isolado de HTML, CSS e JS, o qual não interfere no restante da aplicação
 // Propiedade: Informaçoes que um componente PAI passa para o componeete FILHO
 // Estado: Informaçoes Mantidas pelo componente (Lembrar: imutabilidade)
