@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from './services/api';
 // Componente: Bloco isolado de HTML, CSS e JS, o qual não interfere no restante da aplicação
 // Propiedade: Informaçoes que um componente PAI passa para o componeete FILHO
 // Estado: Informaçoes Mantidas pelo componente (Lembrar: imutabilidade)
@@ -6,6 +7,7 @@ import './global.css';
 import './App.css';
 import './Sidebar.css';
 import './Main.css';
+
 
 
 
