@@ -9,6 +9,7 @@ import './Sidebar.css';
 import './Main.css';
 
 function App() {
+  const [devs, setDevs] = useState([]);
   const [github_username, setGuithubUsername] = useState('');
   const [techs, setTechs] = useState('');
   const [latitude, setLatitude] = useState('');
@@ -30,6 +31,18 @@ function App() {
         timeout: 30000,
       }
     )
+  }, []);
+
+  useEffect(() => {
+    async function loadDevs(){
+      const response = await api.get('/devs');
+      
+      setDevs(response.data);
+   
+    }
+
+    loadDevs();
+
   }, []);
 
 async function handleAddDev (e){
@@ -86,50 +99,19 @@ async function handleAddDev (e){
       </aside>
       <main>
         <ul>
-          <li className="dev-item">
+          {devs.map(dev => (
+            <li className="dev-item">
             <header>
-              <img src="https://avatars0.githubusercontent.com/u/59286021?s=460&v=4" alt="Alvaro Ribeiro Pereira"></img>
+              <img src={dev.avatar_url} alt={dev.name}></img>
               <div className="user-info">
-                <strong>Alvaro Ribeiro Pereira</strong>
-                <span>Java, C# , C++</span>
+                <strong>{dev.name}</strong>
+                <span>{dev.techs.join(', ')}</span>
               </div>
             </header>
-              <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>
-              <a href="https://github.com/alvaroico">Acessar Perfil Github</a>
+              <p>{dev.bio}</p>
+              <a href={`https://github.com/${dev.github_username}`}>Acessar Perfil Github</a>
           </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars0.githubusercontent.com/u/59286021?s=460&v=4" alt="Alvaro Ribeiro Pereira"></img>
-              <div className="user-info">
-                <strong>Alvaro Ribeiro Pereira</strong>
-                <span>Java, C# , C++</span>
-              </div>
-            </header>
-              <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>
-              <a href="https://github.com/alvaroico">Acessar Perfil Github</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars0.githubusercontent.com/u/59286021?s=460&v=4" alt="Alvaro Ribeiro Pereira"></img>
-              <div className="user-info">
-                <strong>Alvaro Ribeiro Pereira</strong>
-                <span>Java, C# , C++</span>
-              </div>
-            </header>
-              <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>
-              <a href="https://github.com/alvaroico">Acessar Perfil Github</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars0.githubusercontent.com/u/59286021?s=460&v=4" alt="Alvaro Ribeiro Pereira"></img>
-              <div className="user-info">
-                <strong>Alvaro Ribeiro Pereira</strong>
-                <span>Java, C# , C++</span>
-              </div>
-            </header>
-              <p>Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos.</p>
-              <a href="https://github.com/alvaroico">Acessar Perfil Github</a>
-          </li>
+          ))}     
         </ul>
       </main>
     </div>
