@@ -58,6 +58,9 @@ async function handleAddDev (e){
   setGuithubUsername('');
   setTechs('');
   //console.log(response.data);
+
+  setDevs([...devs, response.data]);
+
 }
 
 
@@ -100,7 +103,7 @@ async function handleAddDev (e){
       <main>
         <ul>
           {devs.map(dev => (
-            <li className="dev-item">
+            <li key={dev._id} className="dev-item">
             <header>
               <img src={dev.avatar_url} alt={dev.name}></img>
               <div className="user-info">
