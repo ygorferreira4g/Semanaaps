@@ -8,9 +8,6 @@ import './App.css';
 import './Sidebar.css';
 import './Main.css';
 
-
-
-
 function App() {
   const [github_username, setGuithubUsername] = useState('');
   const [techs, setTechs] = useState('');
@@ -38,6 +35,16 @@ function App() {
 async function handleAddDev (e){
   e.preventDefault();
 
+  const response = await api.post('/devs',{
+    github_username,
+    techs,
+    latitude,
+    longitude,
+  })
+
+  setGuithubUsername('');
+  setTechs('');
+  //console.log(response.data);
 }
 
 
