@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {StyleSheet, Image, View, Text } from 'react-native';
+import { StyleSheet, Image, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'; 
+import { MaterialIcons } from '@expo/vector-icons';
 
 function Main({ navigation }){
     const [ currentRegion, setCurrentRegion ] = useState(null);
@@ -36,6 +37,7 @@ function Main({ navigation }){
     }
 
     return (
+        <>
     <MapView initialRegion={ currentRegion } style={styles.map} >
         <Marker coordinate={{ latitude: -12.5426564, longitude: -55.7125747 }} >
         <Image style={styles.avatar} source={{ uri: 'https://avatars0.githubusercontent.com/u/59286021?v=4'}} ></Image>
@@ -54,6 +56,21 @@ function Main({ navigation }){
         
         </Marker>    
     </MapView>
+    <View style={styles.searchForm}>
+        <TextInput 
+            style={styles.searchInput}
+            placeholder="Buscar Devs por techs..."
+            placeholderTextColor="#999"
+            autoCapitalize="words"
+            autoCorrect={false}        
+        />
+
+<TouchableOpacity onPress={() => {}} style={styles.loadButton} >
+            <MaterialIcons name="my-location" size={20} color="#FFF" />
+        </TouchableOpacity>
+
+    </View>
+    </>
     );
 }
 
@@ -86,10 +103,42 @@ const styles = StyleSheet.create({
 
     devTechs: {
         marginTop: 5,
-    }
-   
+    },
 
+    searchForm: {
+        position: 'absolute',
+        top: 20,
+        left: 20,
+        right: 20,
+        zIndex: 5,
+        flexDirection: 'row',
+    },
 
+    searchInput: {
+        flex: 1,
+        height: 50,
+        backgroundColor: '#FFF',
+        color: '#333',
+        borderRadius: 25,
+        paddingHorizontal: 20,
+        fontSize: 16,
+        shadowColor : '#000',
+        shadowOffset: {
+            width: 4,
+            height: 4,
+        },
+        elevation: 2,
+    },
+
+    loadButton: {
+        width: 50,
+        height: 50,
+        backgroundColor: '#8E4Dff',
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 15,
+    },
 })
 
 export default Main;
