@@ -3,7 +3,7 @@ import {StyleSheet, Image, View, Text } from 'react-native';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'; 
 
-function Main(){
+function Main({ navigation }){
     const [ currentRegion, setCurrentRegion ] = useState(null);
 
     useEffect(() => {
@@ -40,7 +40,9 @@ function Main(){
         <Marker coordinate={{ latitude: -12.5426564, longitude: -55.7125747 }} >
         <Image style={styles.avatar} source={{ uri: 'https://avatars0.githubusercontent.com/u/59286021?v=4'}} ></Image>
         
-        <Callout>
+        <Callout onPress={() => {
+            navigation.navigate('Profile', { github_username: 'alvaroico' });
+        }} >
             <View style={styles.callout}>
                 <Text  style={styles.devName} >Alvaro Ribeiro Pereira</Text>
                 <Text style={styles.devBioe} >orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a</Text>
