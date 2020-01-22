@@ -47,9 +47,10 @@ function Main({ navigation }){
             }
         });
         //console.log(response.data.devs);
-        //console.log(response.data);
-        console.log(response.data.location.coordinates[0]);
-        //setDevs(response.data.devs);
+       // console.log(response.data.devs);
+       // console.log(latitude);
+       // console.log(longitude);
+        setDevs(response.data.devs);
     }
 
     function handleRegionChanged ( region ){
@@ -63,11 +64,12 @@ function Main({ navigation }){
 
     return (
         <>
-    <MapView onRegionChange={handleRegionChanged} initialRegion={ currentRegion } style={styles.map} >
+    <MapView onRegionChange={handleRegionChanged} initialRegion={ currentRegion } style={styles.map} 
+    >
          {devs.map( dev => (
-             <Marker key={dev._id} coordinate={{ 
-                latitude: dev.location.coordinate[0], 
-                longitude: dev.location.coordinate[1] 
+             <Marker key={dev._id} coordinate={ {
+                longitude: dev.location.coordinates[0], 
+                latitude: dev.location.coordinates[1],
                 }} 
             >
              <Image style={styles.avatar} source={{ uri: dev.avatar_url }} />
