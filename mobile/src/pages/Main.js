@@ -9,6 +9,7 @@ import api from '../services/api';
 function Main({ navigation }){
     const [devs, setDevs] = useState([]);
     const [ currentRegion, setCurrentRegion ] = useState(null);
+    const [techs, setTechs] = useState('');
 
     useEffect(() => {
         async function loadInitialPossition(){
@@ -43,7 +44,7 @@ function Main({ navigation }){
             params: {
                 latitude,
                 longitude,
-                techs: 'Android'
+                techs
             }
         });
         //console.log(response.data.devs);
@@ -95,7 +96,9 @@ function Main({ navigation }){
             placeholder="Buscar Devs por techs..."
             placeholderTextColor="#999"
             autoCapitalize="words"
-            autoCorrect={false}        
+            autoCorrect={false}
+            value={techs}
+            onChangeText={setTechs}//text => setTech(text)       
         />
 
 <TouchableOpacity onPress={loadDevs} style={styles.loadButton} >
