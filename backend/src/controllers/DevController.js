@@ -2,7 +2,7 @@ const axios = require('axios');
 const Dev = require('../models/Dev');
 const parseStringAsArray = require('../utils/parseStringAsArray');
 // index, show, store, update, destroy
-const { findConnections } = require ('../utils/websocket');
+const { findConnections, sendMessage } = require ('../utils/websocket');
 
 module.exports = {
   //filtros tipo name: 'Diego' 
@@ -43,7 +43,7 @@ module.exports = {
            techsArray,
        )
 
-        console.log(sendSocketMessageTo);
+        sendMessage(sendSocketMessageTo, 'new-dev', dev);
 
         }
             
